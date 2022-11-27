@@ -1,6 +1,6 @@
 $(name).pdf: main.tex
 	# TEXINPUTS from env
-	$(LATEXMK) -lualatex $<
+	-$(LATEXMK) -lualatex $<
 	cp main.pdf $(name).pdf
 
 clean:
