@@ -40,23 +40,33 @@
 \pgfkeys{%
     /Entry/.is family,
     /Entry,
+    % NOTE: default is different from .default
     default/.style = {
-        tags = \today,
+        tags = ,
         date = \today,
     },
-    tags/.initial = undef,
-    date/.initial = undef,
+    % can be anything since we always use default style
+    tags/.initial,
+    date/.initial,
 }
 \NewDocumentCommand{\Entry}{O{}m}{%
     \pgfkeys{/Entry, default, #1}%
     \section{#2}
     \textbf{Tags: }\blue{\pgfkeysvalueof{/Entry/tags}}
 
-    \textbf{Date: }\pgfkeysvalueof{/Entry/Date}
+    \textbf{Date: }\pgfkeysvalueof{/Entry/date}
 
 }
 \NewDocumentCommand{\Paper}{O{}mmm}{%{year}{author}{title}
     \Entry[#1]{#2 - #3, \textit{#4}}
+}
+\NewDocumentCommand{\Book}{O{}mmm}{%{year}{author}{title}
+    \Entry[#1]{#2 - #3, \textit{#4}}
+}
+\NewDocumentCommand{\Video}{O{}mmmm}{%{year}{speaker}{title/topic}{link}
+    \Entry[#1]{#2 - #3, \textit{#4}}
+    \textbf{Link: }\href{#5}{recording}
+
 }
 
 \begin{document}
@@ -70,7 +80,7 @@
 hejohns' notes}
 \author[hejohns]{hejohns}
 \date{\today}
-\publishers{made with kaobook, set in EB Garamond}
+\publishers{made with kaobook \\ set in EB Garamond}
 
 %----------------------------------------------------------------------------------------
 
@@ -181,17 +191,25 @@ f
 
     (although until 193?, recursive $↦$ primitive recursive, for Gödel,
     now recursive $↦$ Herbrand-Gödel general recursive)
+\chapter{Book Reviews}
+\Book[]{1995}{Makiko Nakano}{Makiko's Diary}
+    Translated by Kazuko Smith
+
+    sticky rice (desserts) = ½sticky rice + ½normal
+\chapter{Presentations/Lectures}
+\Video[]{2007}{Bryan Cantrill}{Dtrace}{https://www.youtube.com/watch?v=6chLw2aodYQ}
+    A
 \chapter{Dictionary}
 \Entry[tags={logic,traditional},date=2022-12-17]{Herbrand's Theorem}
     TODO: convert notes from Prof. Blass' November seminar
     \Index{Herbrand's Theorem}
 \Entry{Locus Solum}
-This is my version of Girard's dictionary.
+    This is my version of Girard's dictionary.
 
-Also afaik the most Girard paper out there is
+    Also afaik the most Girard paper out there is
 \Entry{Realizability}
-This is how we can attach beamer presentations
-\attachfile{../../22f/rg/pfenning-davies/slides.pdf}
+    This is how we can attach beamer presentations
+    \attachfile{../../22f/rg/pfenning-davies/slides.pdf}
 
 %\pagelayout{wide} % No margins
 %\addpart{Title of the Part}
