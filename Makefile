@@ -5,7 +5,9 @@ export name := reviews
 default:
 	$(MAKE) -C src
 
+view: default
+	nohup okular src/reviews.pdf > /dev/null 2>&1 &
 clean:
 	$(MAKE) -C src clean
 
-.PHONY: default clean
+.PHONY: default view clean

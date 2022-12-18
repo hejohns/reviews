@@ -5,12 +5,12 @@
 	fontsize=10pt, % Base font size
 	twoside=false, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
 	%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
-	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
+	secnumdepth=-1, % How deep to number headings. Defaults to 1 (sections)
 ]{kaobook}
 
 % Choose the language
 \usepackage[english]{babel} % Load characters and hyphenation
-\usepackage[english=british]{csquotes}	% English quotes
+\usepackage[english=american]{csquotes}	% English quotes
 
 % Load packages for testing
 \usepackage{blindtext}
@@ -32,17 +32,45 @@
 \makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
 
 
+% my additional preamble stuff
+\usepackage{hejohns-fonts} % my own font stuff
+\usepackage{hejohns-colors}
+\usepackage{attachfile2}
+\NewDocumentCommand{\Index}{m}{\index{#1}\purple{#1}}
+\pgfkeys{%
+    /Entry/.is family,
+    /Entry,
+    default/.style = {
+        tags = \today,
+        date = \today,
+    },
+    tags/.initial = undef,
+    date/.initial = undef,
+}
+\NewDocumentCommand{\Entry}{O{}m}{%
+    \pgfkeys{/Entry, default, #1}%
+    \section{#2}
+    \textbf{Tags: }\blue{\pgfkeysvalueof{/Entry/tags}}
+
+    \textbf{Date: }\pgfkeysvalueof{/Entry/Date}
+
+}
+\NewDocumentCommand{\Paper}{O{}mmm}{%{year}{author}{title}
+    \Entry[#1]{#2 - #3, \textit{#4}}
+}
+
 \begin{document}
 
 %----------------------------------------------------------------------------------------
 %	BOOK INFORMATION
 %----------------------------------------------------------------------------------------
 
-\titlehead{Document Template}
-\title[Template for the {\normalfont\texttt{kaobook}} Class]{Template for the {\normalfont\texttt{kaobook}} Class}
-\author[JBG]{Johnny B. Goode}
+\titlehead{some notes of mine}
+\title[Template for the {\normalfont\texttt{kaobook}} Class]{%
+hejohns' notes}
+\author[hejohns]{hejohns}
 \date{\today}
-\publishers{An Awesome Publisher}
+\publishers{made with kaobook, set in EB Garamond}
 
 %----------------------------------------------------------------------------------------
 
@@ -82,10 +110,11 @@
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
-\dedication{
-	The harmony of the world is made manifest in Form and Number, and the heart and soul and all the poetry of Natural Philosophy are embodied in the concept of mathematical beauty.\\
-	\flushright -- D'Arcy Wentworth Thompson
-}
+% NOTE: keeping this here to preserve minimal_book formatting
+%\dedication{
+%	The harmony of the world is made manifest in Form and Number, and the heart and soul and all the poetry of Natural Philosophy are embodied in the concept of mathematical beauty.\\
+%	\flushright -- D'Arcy Wentworth Thompson
+%}
 
 %----------------------------------------------------------------------------------------
 %	OUTPUT TITLE PAGE AND PREVIOUS
@@ -98,9 +127,9 @@
 %	PREFACE
 %----------------------------------------------------------------------------------------
 
-\chapter*{Preface}
-
-\blindtext
+%\chapter*{Preface}
+%
+%\blindtext
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
@@ -136,27 +165,48 @@
 \mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
 \setchapterstyle{kao} % Choose the default chapter heading style
 
-\chapter{First Chapter}
+\chapter{Papers}
+\Paper[tags={computability,history},date=2022-12-17]{2012}{Soare}{Formalism and intuition in computability}
+up to p.9
 
-\blindtext
+f
+\Paper[tags={logic,computability,history}]{1981}{Kleene}{Origins of recursive function theory}
+    need to read last ~10 pages
 
-\pagelayout{wide} % No margins
-\addpart{Title of the Part}
-\pagelayout{margin} % Restore margins
+    nice review by Steward Shapiro, 1990
 
-\chapter{Second Chapter}
+    λ-defineable = Church,
+    recursive = Gödel, Herbrand,
+    computable = Turing,
 
-\blindtext
+    (although until 193?, recursive $↦$ primitive recursive, for Gödel,
+    now recursive $↦$ Herbrand-Gödel general recursive)
+\chapter{Dictionary}
+\Entry[tags={logic,traditional},date=2022-12-17]{Herbrand's Theorem}
+    TODO: convert notes from Prof. Blass' November seminar
+    \Index{Herbrand's Theorem}
+\Entry{Locus Solum}
+This is my version of Girard's dictionary.
 
-\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+Also afaik the most Girard paper out there is
+\Entry{Realizability}
+This is how we can attach beamer presentations
+\attachfile{../../22f/rg/pfenning-davies/slides.pdf}
 
-\pagelayout{wide} % No margins
-\addpart{Appendix}
-\pagelayout{margin} % Restore margins
-
-\chapter{Some more blindtext}
-
-\blindtext
+%\pagelayout{wide} % No margins
+%\addpart{Title of the Part}
+%\pagelayout{margin} % Restore margins
+%
+%
+%\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+%
+%\pagelayout{wide} % No margins
+%\addpart{Appendix}
+%\pagelayout{margin} % Restore margins
+%
+%\chapter{Some more blindtext}
+%
+%\blindtext
 
 %----------------------------------------------------------------------------------------
 
