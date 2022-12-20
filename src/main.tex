@@ -68,6 +68,21 @@
     \textbf{Link: }\href{#5}{recording}
 
 }
+\NewDocumentCommand{\Dict}{O{}m}{\Entry[#1]{\Index{#2}}}%{term}
+\NewDocumentCommand{\See}{}{\textbf{See: }}
+\newtheoremstyle{break}% https://tex.stackexchange.com/a/37805
+{}%
+{}%
+{}%
+{}%
+{\bfseries}%
+{}%
+{\newline}%
+{}%
+\theoremstyle{break}
+\newtheorem*{thm}{Theorem} % do not number theorems
+\newtheorem*{Def}{Definition} % do not number definitions
+\newtheorem*{Ex}{Example} % do not number examples
 
 \begin{document}
 
@@ -200,16 +215,171 @@ f
 \Video[]{2007}{Bryan Cantrill}{Dtrace}{https://www.youtube.com/watch?v=6chLw2aodYQ}
     A
 \chapter{Dictionary}
-\Entry[tags={logic,traditional},date=2022-12-17]{Herbrand's Theorem}
+\Dict[tags={logic,computability},date=2022-12-18]{Craig's Trick}
+    \begin{thm}[Craig's Trick]
+        \marginnote{%
+            So ce theories are just as effective as computable ones,
+            which is good news for axiom schemas.
+            A priori, it's not clear that theories w/ axiom schemas are as effective
+            as finitely axiomatizable ones,
+            but intuitively, axiom schemas are of the same character,
+            are ``easily checkable".
+            Craig's trick formally grounds this.
+        }
+        \marginnote{%
+            eg $PA$ is as effective as $PA^-$.
+            (although $PA^-$ has nice utility for the Entscheidungsproblem.)
+        }
+        From Mathew (MATH 684):
+        $S$ ce set of sentences $⟹ ∃S^*.S^*$ computable $∧$ they have the same theory.
+
+        (my terminology) a theory is computable $⟺$ it is ce
+        \sidenote{…sentences up to logical equivalence}
+
+        ie a theory is computably axiomatized $⟺$ it is computably enumerably axiomatized
+    \end{thm}
+    \begin{proof}
+        \marginnote{%
+            Wikipedia has a similar sketch.
+        }
+        MATH 684:
+        $S$ ce, so you only have a listing of the sentences.
+        We can make it strictly monotonic by relisting,
+        but by adding a bunch of tautological noise or padding to each sentence
+        (say, by conjuncting tautologies, assuming eg Gödel's prime factorization encoding)
+        st the Gödel number is much larger.
+        (Each sentence is relisted logically equivalently.)
+        \marginnote{%
+            Somehow the proof itself doesn't feel intuitive,
+            but the ``intended use" of the theorem \emph{is}.
+        }
+    \end{proof}
+
+    \See Theory
+\Dict[tags={logic,computability},date=2022-12-18]{Enumeration Operator}
+    \marginnote{From Rogers' 1967 \textit{Theory of Recursive Functions}.}
+
+    \begin{Def}[Enumeration Operator]
+        \marginnote{%
+            An archetypical example:
+            In Gödel's incompleteness theorems,
+            each computable enumeration of a theory (my sense) gives rise to
+            an enumeration of the theory (the deductive closure).
+            In Miller's terms,
+            there is the ``deducibility operator" $D$ that gives for each axiom set $B$,
+            $D(B)$, the set of consequences.
+        }
+        Each enumeration reduction witness $z$ and $B$ determine the $A$,
+        so each $z$ determines a enumeration operator $Φ_z : 2^ω → 2^ω$.
+
+        ie $Φ_z(B) = A ⟺ A ≤_e X$ witnessed by $z$.
+
+        $A ≡_e B ⟺ A ≤_e B ∧ B ≤_e A$
+    \end{Def}
+    \begin{thm}
+        \marginnote{I'm thinking of the deducibility operator the whole time.}
+        \begin{itemize}
+            \item[]
+            \item enumeration operators compose, by inspection
+            \item $A ⊆ B ⟹ Φ(A) ⊆ Φ(B)$ (monotonicity)
+            \item $x ∈ Φ(B) ⟹ ∃C.C \text{ finite } ∧ C ⊆ B ∧ x ∈ Φ(C)$ (continuity)
+            \sidenote{which I'd call compactness}
+        \end{itemize}
+    \end{thm}
+
+    \See Dana Scott's graph model of λ-calculus
+\Dict[tags={logic,computability},date=2022-12-18]{Enumeration Reducibility}
+    \marginnote[-2.7cm]{From Rogers' 1967 \textit{Theory of Recursive Functions}.}
+    \begin{Def}[Enumeration Reduc(tion/ible)]
+        \marginnote[-2.7cm]{%
+            This definition is not as nice as (many-)one or Turing reduction,
+            but the idea is that we want to
+            ``effectively list $A$ using any listing (computable or not) of $B$".
+            Note that enumeration reductions ``only use positive information about $B$,
+            and produce only positive information about $A$;
+            whereas Turing reductions use and produce both positive and negative information."
+            (paraphrased from the introduction to Russell Miller's \textit{Non-coding Enumeration Operators}.)
+        }
+        $A ≤_e B ⟺ ∃z.∀x.x ∈ A ↔ ∃u.⟨x,y⟩ ∈ W_z ∧ D_u ⊆ B$
+
+        where $z$ is the Gödel code of the reduction witness,
+        and $D_u$ is the finite set associated with $u$ as a canonical index (ie a tuple).
+        \sidenote{%
+            The idea w/ $u$ is that to list $A$ while watching elements enter $B$,
+            you should only need (to see) a finite amount of $B$ to list a particular element $x ∈ A$.
+        }
+    \end{Def}
+    Rogers' (really simple) examples:
+    \begin{itemize}
+        \item $\{2n | n ∈ ω\} ≤_e ω$
+        \item $A$ ce $⟹$ $∀B.A ≤_e B$
+    \end{itemize}
+
+    \See Enumeration Operator
+\Dict[tags={logic,λ-calculus},date=2022-12-18]{Dana Scott's Graph Model}
+    \begin{Def}
+        \begin{align}
+            ⟦λx.⟧ &:=  \\
+            ⟦e_1 e_2⟧ &:= 
+        \end{align}
+    \end{Def}
+
+    \See Enumeration Operator
+\Dict[tags={logic},date=2022-12-17]{Herbrand's Theorem}
     TODO: convert notes from Prof. Blass' November seminar
     \Index{Herbrand's Theorem}
-\Entry{Locus Solum}
+\Dict[tags={logic},date=2022-12-19]{Knaster-Tarski}
+    \begin{thm}[Knaster-Tarski Fixpoint Theorem]
+        \marginnote{%
+            This theorem has many statements, and this is the easiest for me to remember.
+            The complete lattice is often a powerset lattice.
+        }
+        Every monotone function on a complete lattice has a complete lattice of fixpoints.
+    \end{thm}
+    \begin{proof}
+        Widely available.
+    \end{proof}
+    \begin{Ex}
+        \begin{itemize}
+            \item[]
+            \item The deducibility operator is a monotone function on sets of sentences.
+                \sidenote{For simplicity, assume everything is about-- and still true about-- a fixed language of arithmetic.}
+                The bottom (least) fixpoint is the (deductively closed) empty theory.
+                The top (greatest) fixpoint is the inconsistent theory, ie the set of all sentences.
+                Consistency of the empty theory
+                (by Gentzen's original cut elimination, or by existence of a model)
+                says this complete lattice is nontrivial.
+
+                Any consistent, computably axiomatizable (deductively closed) theory that proves more than the empty theory
+                is an intermediate fixpoint-- eg PA.
+                Incompleteness says there is no intermediate fixpoint above PA that is complete,
+                but there are at least $2^{ℵ_0}$ intermediate fixpoints above PA where we keep adding $Con(T)$ or $¬Con(T)$.
+                \sidenote{Are there complete intermediate fixpoints?}
+        \end{itemize}
+    \end{Ex}
+
+    \See Enumeration Operator, Dana Scott's Graph Model
+\Dict{Locus Solum}
     This is my version of Girard's dictionary.
 
-    Also afaik the most Girard paper out there is
-\Entry{Realizability}
+    Also afaik the most Girard paper there is
+\Dict{$PA$}
+    Peano Arithmetic w/ induction.
+    $PA^-$ := PA ∖ induction
+\Dict{Realizability}
     This is how we can attach beamer presentations
     \attachfile{../../22f/rg/pfenning-davies/slides.pdf}
+\Dict[tags={logic},date=2022-12-18]{Theory}
+    An unfortunately ambiguous term,
+    but you can usually figure it out from context,
+    if it really matters.
+
+    I tend to use ``Theory" to just mean a set of sentences,
+    as in the $Γ$ in the sequent $Γ ⊢ $.
+    So I see a finite set for ``the theory of groups",
+    and a finite set unioned w/ a schema for ``Peano Arithmetic".
+    (and the empty set for the Entscheidungsproblem.)
+    Sometimes, people mean a deductively closed set of sentences.
 
 %\pagelayout{wide} % No margins
 %\addpart{Title of the Part}
