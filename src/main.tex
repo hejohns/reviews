@@ -428,18 +428,31 @@ f
     When there are multiple characterizations of the same thing.
     Typically followed by a bullet list.
 \Dict[tags={category theory}]{Universal Property}
-    NOTE: this is going to be in constant flux for a while…
+    NOTE: this is going to be in constant flux until I finally start to understand category theory…
 
-    TODO: semiformal definition goes here
+    A smattering:
     \marginnote{%
         afaik this is an \Index{informal notion}.
         Things defined by universal properties
         should automatically be respected by lower level
         mappings on the base structure,
         that respect the lower level base structure.
+        Except not really.
         \footnotemark
     }
     \footnotetext{not at all how I want to phrase this, but I'm still trying to figure out what I mean}
+    \begin{itemize}
+        \item fully faithful embeddings \emph{reflect} limits and colimits,
+            but don't in general \emph{preserve} limits/colimts.
+            \sidenote{%
+                The Yoneda embedding preserves limits though.
+                TODO: why?
+            }
+
+            Terminal cones won't necessarily still be Terminal.
+            eg two atoms, 
+            Initial cocones won't necessarily still be Initial.
+    \end{itemize}
     \marginnote{%
         TODO: how does Yoneda tie in?
     }
@@ -447,9 +460,12 @@ f
     \begin{thm}[see Stoy,\textit{Denotational Semantics} 6.29. Theorem.]
         \marginnote{NOTE: re name: iirc this is mentioned in Awodey in the Yoneda chapter}
         Every partial order can be embedded in a complete lattice.
-        \marginnote{The partial order is often a lattice already.
-            afaik, the lattice structure is also respected
-            \emph{because} join, meet, …, are defined by universal properties.
+        \marginnote{%
+            The partial order is often a lattice already.
+            meets are preserved but not necessarily joins.
+            TODO:
+            %afaik, the lattice structure is also respected
+            %\emph{because} join, meet, …, are defined by universal properties.
         }
         \marginnote{%
             A nice example from Stoy (starting $∼$p.89): (everything standard $≤$ ordering)
@@ -463,15 +479,14 @@ f
         but for the theorem statement, we'll describe it this way.}
     \end{thm}
     \begin{proof}
-        alt.
+        TFAE (morally)
         \begin{itemize}
-            \item The presheaf category in the Yoneda embedding is morally a complete lattice.
+            \item The presheaf category in the Yoneda embedding has all limits and colimits.
+            \item The Yoneda embedding of a thin category \emph{is} the powerset. TODO: how to make this more precise? How do you compose the embedding?
             \item Dedekind cuts.
                 
-            ie map each object to the downards closure,
-            and utilize the powerset lattice structure.
-
-            ie $∪,∩$ and reasonable $⊤,⊥$
+            ie map each object to the downards closure (set of lower objects).
+            This is a (fully faithful) embedding into the powerset lattice.
         \end{itemize}
     \end{proof}
 
