@@ -190,7 +190,7 @@ hejohns' notes}
 \mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
 \setchapterstyle{kao} % Choose the default chapter heading style
 
-\chapter{Papers}
+\chapter{Papers/Articles}
 \Paper[tags={computability,history},date=2022-12-17]{2012}{Soare}{Formalism and intuition in computability}
 up to p.9
 
@@ -215,6 +215,8 @@ f
 \Video[]{2007}{Bryan Cantrill}{Dtrace}{https://www.youtube.com/watch?v=6chLw2aodYQ}
     A
 \chapter{Dictionary}
+\Dict[tags={terminology},date=2022-12-21]{AFAI*}
+    As Far As I (Can Tell / Know / …)
 \Dict[tags={logic,computability},date=2022-12-18]{Craig's Trick}
     \begin{thm}[Craig's Trick]
         \marginnote{%
@@ -256,6 +258,26 @@ f
     \end{proof}
 
     \See Theory
+\Dict[tags={order},date=2022-12-21]{Complete Lattice}
+    \begin{Def}[Complete Lattice]
+        TFAE
+        \begin{itemize}
+            \item lattice w/ all joins and meets $⟹ $
+            \item lattice w/ all joins, meets, top, bottom
+            \item lattice w/ all joins
+                \sidenote{%
+                    People tend to say that the reals are ``\emph{the} complete ordered field",
+                    \footnotemark
+                    in the sense that every bounded (above) set has a supremum.
+                    Which implies that every bounded (below) set has a infimum.
+                    (NOTE: ``has" has a very specific meaning that everyone learns to live with.)
+                }
+                \footnotetext{TODO: apparently the ambiguity of ``complete" makes a difference,
+                but afaik the following is itself correct.}
+        \end{itemize}
+
+        \See Thin Yoneda Embedding
+    \end{Def}
 \Dict[tags={logic,computability},date=2022-12-18]{Enumeration Operator}
     \marginnote{From Rogers' 1967 \textit{Theory of Recursive Functions}.}
 
@@ -380,7 +402,44 @@ f
     and a finite set unioned w/ a schema for ``Peano Arithmetic".
     (and the empty set for the Entscheidungsproblem.)
     Sometimes, people mean a deductively closed set of sentences.
+\Dict[tags={terminology},date=2022-12-21]{TFAE}
+    The Following Are Equivalent
 
+    When there are multiple characterizations of the same thing.
+    Typically followed by a bullet list.
+\Dict[tags={order},date=2022-12-21]{Thin Yoneda Embedding}
+    \begin{thm}[see Stoy,\textit{Denotational Semantics} 6.29. Theorem.]
+        \marginnote{NOTE: re name: iirc this is mentioned in Awodey in the Yoneda chapter}
+        Every partial order can be embedded in a complete lattice.
+        \marginnote{The partial order is often a lattice already.
+        I suppose you'd have to ensure the embedding respects the lattice structure as well,
+        but afaict this should happen.
+        Similar situation w/ the Yoneda embedding.}
+    \end{thm}
+    \begin{proof}
+        alt.
+        \begin{itemize}
+            \item The presheaf category in the Yoneda embedding is morally a complete lattice.
+            \item Dedekind cuts.
+                
+            ie map each object to the downards closure,
+            and utilize the lattice structure of $Set$
+
+            ie $∪,∩$ and reasonable $⊤,⊥$
+        \end{itemize}
+    \end{proof}
+    \marginnote{%
+        A nice example from Stoy (starting $∼$p.89): (everything standard $≤$ ordering)
+        $\mathbb{Q}$ is a partial order.
+        \footnotemark
+        $\mathbb{Q}$ can be completed
+        by adding $⊤ = +∞, ⊥ = -∞$
+        and taking Dedekind cuts.
+    }
+    \footnotetext{actually $\mathbb{Q}$ is a total non-empty order, thus a lattice,
+    but for the theorem statement, we'll describe it this way.}
+
+    \See Complete Lattice
 %\pagelayout{wide} % No margins
 %\addpart{Title of the Part}
 %\pagelayout{margin} % Restore margins
