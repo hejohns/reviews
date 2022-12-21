@@ -36,7 +36,7 @@
 \usepackage{hejohns-fonts} % my own font stuff
 \usepackage{hejohns-colors}
 \usepackage{attachfile2}
-\NewDocumentCommand{\Index}{m}{\index{#1}\purple{#1}}
+\NewDocumentCommand{\Index}{m}{\index{\lowercase{#1}}\purple{#1}}
 \pgfkeys{%
     /Entry/.is family,
     /Entry,
@@ -215,7 +215,7 @@ f
 \Video[]{2007}{Bryan Cantrill}{Dtrace}{https://www.youtube.com/watch?v=6chLw2aodYQ}
     A
 \chapter{Dictionary}
-\Dict[tags={terminology},date=2022-12-21]{AFAI*}
+\Dict[tags={acronyms},date=2022-12-21]{AFAI*}
     As Far As I (Can Tell / Know / …)
 \Dict[tags={logic,computability},date=2022-12-18]{Craig's Trick}
     \begin{thm}[Craig's Trick]
@@ -278,6 +278,20 @@ f
 
         \See Thin Yoneda Embedding
     \end{Def}
+\Dict[tags={logic,computability}]{Effective}
+    An \Index{informal notion}.
+
+    I typically use ``effective" to mean alt.
+    \begin{itemize}
+        \item ``morally computable"
+        \item ``probably computable, but then I'd have to actually check"
+    \end{itemize}
+\Dict[tags={personal terminology}]{Emotion}
+    I use ``emotionally" similarly to ``intuitively" or ``morally",
+    but ``emotionally" has more to do with the gut feeling.
+    Something that is pre-, or maybe post-, or maybe anti-, rational.
+
+    \See Informal Notion
 \Dict[tags={logic,computability},date=2022-12-18]{Enumeration Operator}
     \marginnote{From Rogers' 1967 \textit{Theory of Recursive Functions}.}
 
@@ -340,16 +354,22 @@ f
     \See Enumeration Operator
 \Dict[tags={logic,λ-calculus},date=2022-12-18]{Dana Scott's Graph Model}
     \begin{Def}
-        \begin{align}
+        \begin{align*}
             ⟦λx.⟧ &:=  \\
             ⟦e_1 e_2⟧ &:= 
-        \end{align}
+        \end{align*}
     \end{Def}
 
     \See Enumeration Operator
 \Dict[tags={logic},date=2022-12-17]{Herbrand's Theorem}
     TODO: convert notes from Prof. Blass' November seminar
     \Index{Herbrand's Theorem}
+\Dict[]{Informal Notion}
+    TODO:
+    \begin{itemize}
+        \item a formal notion probably applies, but then I'd have to actually check
+        \item the formal notion doesn't quite emotionally capture the concept
+    \end{itemize}
 \Dict[tags={logic},date=2022-12-19]{Knaster-Tarski}
     \begin{thm}[Knaster-Tarski Fixpoint Theorem]
         \marginnote{%
@@ -385,7 +405,7 @@ f
     This is my version of Girard's dictionary.
 
     Also afaik the most Girard paper there is
-\Dict{$PA$}
+\Dict{PA}
     Peano Arithmetic w/ induction.
     $PA^-$ := PA ∖ induction
 \Dict{Realizability}
@@ -402,19 +422,45 @@ f
     and a finite set unioned w/ a schema for ``Peano Arithmetic".
     (and the empty set for the Entscheidungsproblem.)
     Sometimes, people mean a deductively closed set of sentences.
-\Dict[tags={terminology},date=2022-12-21]{TFAE}
+\Dict[tags={acronyms},date=2022-12-21]{TFAE}
     The Following Are Equivalent
 
     When there are multiple characterizations of the same thing.
     Typically followed by a bullet list.
+\Dict[tags={category theory}]{Universal Property}
+    NOTE: this is going to be in constant flux for a while…
+
+    TODO: semiformal definition goes here
+    \marginnote{%
+        afaik this is an \Index{informal notion}.
+        Things defined by universal properties
+        should automatically be respected by lower level
+        mappings on the base structure,
+        that respect the lower level base structure.
+        \footnotemark
+    }
+    \footnotetext{not at all how I want to phrase this, but I'm still trying to figure out what I mean}
+    \marginnote{%
+        TODO: how does Yoneda tie in?
+    }
 \Dict[tags={order},date=2022-12-21]{Thin Yoneda Embedding}
     \begin{thm}[see Stoy,\textit{Denotational Semantics} 6.29. Theorem.]
         \marginnote{NOTE: re name: iirc this is mentioned in Awodey in the Yoneda chapter}
         Every partial order can be embedded in a complete lattice.
         \marginnote{The partial order is often a lattice already.
-        I suppose you'd have to ensure the embedding respects the lattice structure as well,
-        but afaict this should happen.
-        Similar situation w/ the Yoneda embedding.}
+            afaik, the lattice structure is also respected
+            \emph{because} join, meet, …, are defined by universal properties.
+        }
+        \marginnote{%
+            A nice example from Stoy (starting $∼$p.89): (everything standard $≤$ ordering)
+            $\mathbb{Q}$ is a partial order.
+            \footnotemark
+            $\mathbb{Q}$ can be completed
+            by adding $⊤ = +∞, ⊥ = -∞$
+            and taking Dedekind cuts.
+        }
+        \footnotetext{actually $\mathbb{Q}$ is a non-empty total order, thus a lattice,
+        but for the theorem statement, we'll describe it this way.}
     \end{thm}
     \begin{proof}
         alt.
@@ -428,18 +474,8 @@ f
             ie $∪,∩$ and reasonable $⊤,⊥$
         \end{itemize}
     \end{proof}
-    \marginnote{%
-        A nice example from Stoy (starting $∼$p.89): (everything standard $≤$ ordering)
-        $\mathbb{Q}$ is a partial order.
-        \footnotemark
-        $\mathbb{Q}$ can be completed
-        by adding $⊤ = +∞, ⊥ = -∞$
-        and taking Dedekind cuts.
-    }
-    \footnotetext{actually $\mathbb{Q}$ is a total non-empty order, thus a lattice,
-    but for the theorem statement, we'll describe it this way.}
 
-    \See Complete Lattice
+    \See Complete Lattice, Universal Property
 %\pagelayout{wide} % No margins
 %\addpart{Title of the Part}
 %\pagelayout{margin} % Restore margins
