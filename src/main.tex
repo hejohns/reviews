@@ -82,7 +82,7 @@
 \theoremstyle{break}
 \newtheorem*{thm}{Theorem} % do not number theorems
 \newtheorem*{Def}{Definition} % do not number definitions
-\newtheorem*{Ex}{Example} % do not number examples
+\newtheorem*{Eg}{Example} % do not number examples
 
 \begin{document}
 
@@ -207,10 +207,11 @@ f
     (although until 193?, recursive $↦$ primitive recursive, for Gödel,
     now recursive $↦$ Herbrand-Gödel general recursive)
 \chapter{Book Reviews}
-\Book[]{1995}{Makiko Nakano}{Makiko's Diary}
+\Book[]{1910,1995}{Makiko Nakano}{Makiko's Diary}
     Translated by Kazuko Smith
 
     sticky rice (desserts) = ½sticky rice + ½normal
+\Book[]{1977,1984}{Joe Stoy}{Denotational Semantics}
 \chapter{Presentations/Lectures}
 \Video[]{2007}{Bryan Cantrill}{Dtrace}{https://www.youtube.com/watch?v=6chLw2aodYQ}
     A
@@ -294,7 +295,8 @@ f
     \See Informal Notion
 \Dict[tags={logic,computability},date=2022-12-18]{Enumeration Operator}
     \marginnote{From Rogers' 1967 \textit{Theory of Recursive Functions}.}
-
+    \marginnote{Stoy notes that the ``finite approximation" requirement on
+    Scott-continuous functions is ``very close to Rogers' notion of Enumeration Reducibility." (p. 100)}
     \begin{Def}[Enumeration Operator]
         \marginnote{%
             An archetypical example:
@@ -323,11 +325,11 @@ f
         \end{itemize}
     \end{thm}
 
-    \See Dana Scott's graph model of λ-calculus
+    \See Scott semantics, Dana Scott's graph model of λ-calculus
 \Dict[tags={logic,computability},date=2022-12-18]{Enumeration Reducibility}
     \marginnote[-2.7cm]{From Rogers' 1967 \textit{Theory of Recursive Functions}.}
     \begin{Def}[Enumeration Reduc(tion/ible)]
-        \marginnote[-2.7cm]{%
+        \marginnote[-2.8cm]{%
             This definition is not as nice as (many-)one or Turing reduction,
             but the idea is that we want to
             ``effectively list $A$ using any listing (computable or not) of $B$".
@@ -365,11 +367,17 @@ f
     TODO: convert notes from Prof. Blass' November seminar
     \Index{Herbrand's Theorem}
 \Dict[]{Informal Notion}
-    TODO:
+    alt.
     \begin{itemize}
         \item a formal notion probably applies, but then I'd have to actually check
         \item the formal notion doesn't quite emotionally capture the concept
     \end{itemize}
+    \begin{Eg}
+        \begin{itemize}
+            \item[]
+            \item effective v. λ-definable, recursive, computable, …
+        \end{itemize}
+    \end{Eg}
 \Dict[tags={logic},date=2022-12-19]{Knaster-Tarski}
     \begin{thm}[Knaster-Tarski Fixpoint Theorem]
         \marginnote{%
@@ -381,7 +389,7 @@ f
     \begin{proof}
         Widely available.
     \end{proof}
-    \begin{Ex}
+    \begin{Eg}
         \begin{itemize}
             \item[]
             \item The deducibility operator is a monotone function on sets of sentences.
@@ -398,7 +406,7 @@ f
                 but there are at least $2^{ℵ_0}$ intermediate fixpoints above PA where we keep adding $Con(T)$ or $¬Con(T)$.
                 \sidenote{Are there complete intermediate fixpoints?}
         \end{itemize}
-    \end{Ex}
+    \end{Eg}
 
     \See Enumeration Operator, Dana Scott's Graph Model
 \Dict{Locus Solum}
@@ -444,14 +452,22 @@ f
     \begin{itemize}
         \item fully faithful embeddings \emph{reflect} limits and colimits,
             but don't in general \emph{preserve} limits/colimts.
-            \sidenote{%
+            \footnote{%
                 The Yoneda embedding preserves limits though.
-                TODO: why?
+                TODO: why? something something RAPL
+            }
+            \sidenote{%
+                Since terminal cones won't necessarily still be Terminal,
+                and initial cocones won't necessarily still be initial.
+                eg take the complete lattice with two atoms $P,Q$ st
+                $P∨Q < ⊤$.
+                When you take the thin Yoneda embedding,
+                $Y(P) ∨ Y(Q) = \{⊥, P\} ∪ \{⊥, Q\} = \{⊥, P, Q\}$,
+                but $Y(P ∨ Q) = \{⊥, P, Q, P ∨ Q\}$
             }
 
-            Terminal cones won't necessarily still be Terminal.
-            eg two atoms, 
-            Initial cocones won't necessarily still be Initial.
+            You wanted the universal property to give you preservation,
+            but you'll have to settle w/ reflection.
     \end{itemize}
     \marginnote{%
         TODO: how does Yoneda tie in?
