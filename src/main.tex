@@ -507,6 +507,73 @@ f
     \end{proof}
 
     \See Complete Lattice, Universal Property
+\chapter{Miniatures}
+    Things I'm interested in understanding
+    that I need to play the long con for.
+    \section{apropos \Index{system T}, system F, logical relations}
+        reminder: system T is another name for the primitive recursive functionals of finite type--
+        aka a simply typed (language w/) primitive recursive combinators.
+        The recursion combinator at higher types extends system T
+        to a large subset of the computable functions.
+
+        The story starts w/ \Index{Proofs and Types}.
+
+        Girard presents logical relations (for strong normalization)
+        first for STLC, then system T, then system F.
+        As the languages get more expressive,
+        the logical relations need to be more clever.
+        Girard motivates the modifications at each language step
+        in part by appealing to ``logical strength considerations" (my phrase).
+
+        eg apparently strong normalization of system T $⟹$ consistency of PA,
+        so the proof of strong normalization of system T needs to go beyond PA formalization.
+        Apparently the original STLC proof was PA formalizable.
+        I can't remember off the top of my head what the modification is,
+        but iirc he appeals to the arithmetic hierarchy or something.
+        \sidenote{TODO: fill this in.}
+        And similarly, apparently the system T proof is formalizable
+        in second order PA,
+        so Girard introduces reducibility candidates for the system F proof,
+        which will probably be a long time until I understand why reducibility candidates
+        aren't formalizable in second order PA.
+
+        To start filling in these details,
+        a more thorough understanding of system T is required.
+        First, all primitive recursive functions are expressible in system T
+        by definition,
+        but how much does recursion at higher types get you?
+        Apparently the class of functions expressible in system T is exactly
+        the computable functions provably total in PA.
+        \begin{itemize}
+            \item[easy?] I don't actually understand what provably total means exactly.
+            \item[hard?] the forwards direction is sketched in Proofs and Types.
+                Girard doesn't prove the backwards,
+                instead saying that the proof for system F is more delicate
+                and does that instead… Apparently the Avigad/Fefferman article has it though.
+            \item[??] So how does PRA at higher types end up giving you Con(PA)??
+                (or rephrased, SN(T) $⟹$ Con(PA))
+                This seems extremely surprising from the outside.
+                I think this is exactly the dialectica interpreation,
+                so I'll have to actually read that first.
+                There's a stack overflow post about this somewhere.
+            \item[koan] I don't really care for primitive recursive functions
+                and PRA much. Too low level.
+                But is there a more intuitive way to see how PRA with higher types
+                somehow says something about PA?
+                Again, maybe the answer is just read the dialectica interpretation.
+        \end{itemize}
+
+        Related to this,
+        I thought understanding realizability and Gödel's dialectica interpretation
+        would clear some of the fog I have about logical relations.
+
+        Some resources: 
+        Avigad's new textbook chapter 14 (although he references earlier chapters,
+        so I've had to read 13, parts of 8 or something, …),
+        Avigad/Fefferman's handbook of proof theory article,
+        Troelstra's preface to Gödel 1958 in the collected works,
+        Proofs and Types,
+
 %\pagelayout{wide} % No margins
 %\addpart{Title of the Part}
 %\pagelayout{margin} % Restore margins
